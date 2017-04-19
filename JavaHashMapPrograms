@@ -1,0 +1,21 @@
+//program for HashMap operations
+
+import java.util.HashMap;
+import java.util.Set;
+import java.util.Map.Entry;
+
+class JavaHashMapPrograms{
+public static void main(String args[]){
+HashMap<Integer, String> map = new HashMap<Integer, String>();
+map.put(1,"Aakash");
+map.put(2,"Ajay");
+map.put(3,"Amar");
+map.put(4,"Ankit");
+System.out.println(map);
+
+Set<Entry<Integer, String>> entrySet = map.entrySet();
+for(Entry<Integer, String> set: entrySet){
+    System.out.println(set.getKey()+" "+set.getValue());
+}
+}
+}
