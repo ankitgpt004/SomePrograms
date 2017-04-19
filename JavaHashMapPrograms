@@ -3,6 +3,8 @@
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Collections;
+import java.util.Map;
 
 class JavaHashMapPrograms{
 public static void main(String args[]){
@@ -17,5 +19,17 @@ Set<Entry<Integer, String>> entrySet = map.entrySet();
 for(Entry<Integer, String> set: entrySet){
     System.out.println(set.getKey()+" "+set.getValue());
 }
+System.out.println(map.get(4));
+
+HashMap<Integer, String> anotherMap = new HashMap<Integer, String>();
+anotherMap.put(5,"anand");
+anotherMap.put(6,"ansh");
+System.out.println(anotherMap);
+anotherMap.putAll(map);
+System.out.println(anotherMap);
+System.out.println(map.containsKey(3));
+System.out.println(map.containsValue("Ankit"));
+System.out.println(map.size());
+Map<Integer, String> syncMap = Collections.synchronizedMap(map);
 }
 }
