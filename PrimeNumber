@@ -1,4 +1,5 @@
 //program for prime number
+
 class PrimeNumber{
 static int n=125;
 static int m=n/2;
