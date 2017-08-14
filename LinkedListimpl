@@ -1,0 +1,36 @@
+public class LinkedListImpl {
+Node current;
+Node last;
+public void LinkedList(int value){
+	Node nptr=new Node(value);
+	if(current==null){
+		current=nptr;
+		last=current;
+	}
+	else {
+		while (current!=null){
+			
+			current=nptr;
+		}
+	}
+  }
+}
+
+class Node{
+	Node link;
+	int data;
+	
+	public Node(){
+		link=null;
+		data=0;
+	}
+    public Node(int data){
+    	this.data=data;
+    }
+	public Node getLink() {
+		return link;
+	}
+	public void setLink(Node link) {
+		this.link = link;
+	}
+}
