@@ -1,0 +1,96 @@
+package maxton;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+
+public class PlanActivity {
+		
+	public static void main(String args[]){
+		
+		List<Plan> oldPlan = new ArrayList<Plan>();
+		Plan oldPlan1 = new Plan();
+		oldPlan1.setPlan(101, "10-MAY-2016", "20-MAY-2016");
+		Plan oldPlan2 = new Plan();
+		oldPlan2.setPlan(102, "10-MAY-2016", "20-MAY-2016");
+		Plan oldPlan3 = new Plan();
+		oldPlan3.setPlan(103, "10-MAY-2016", "20-MAY-2016");
+		Plan oldPlan4 = new Plan();
+		oldPlan4.setPlan(104, "10-MAY-2016", "20-MAY-2016");
+		Plan oldPlan5 = new Plan();
+		oldPlan5.setPlan(105, "10-MAY-2016", "20-MAY-2016");
+		Plan oldPlan6 = new Plan();
+		oldPlan6.setPlan(106, "10-MAY-2016", "20-MAY-2016");
+		Plan oldPlan7 = new Plan();
+		oldPlan7.setPlan(107, "10-MAY-2016", "20-MAY-2016");
+		oldPlan.add(oldPlan1);
+		oldPlan.add(oldPlan2);
+		oldPlan.add(oldPlan3);
+		oldPlan.add(oldPlan4);
+		oldPlan.add(oldPlan5);
+		oldPlan.add(oldPlan6);
+		oldPlan.add(oldPlan7);
+		System.out.println(oldPlan);
+		
+		List<Plan> newPlan = new ArrayList<Plan>();
+		Plan newPlan1 = new Plan();
+		newPlan1.setPlan(101, "01-MAY-2016", "05-MAY-2016");
+		Plan newPlan2 = new Plan();
+		newPlan2.setPlan(102, "15-MAY-2016", "18-MAY-2016");
+		Plan newPlan3 = new Plan();
+		newPlan3.setPlan(103, "05-MAY-2016", "25-MAY-2016");
+		Plan newPlan4 = new Plan();
+		newPlan4.setPlan(104, "15-MAY-2016", "25-MAY-2016");
+		Plan newPlan5 = new Plan();
+		newPlan5.setPlan(105, "05-MAY-2016", "15-MAY-2016");
+		Plan newPlan6 = new Plan();
+		newPlan6.setPlan(106, "25-MAY-2016", "30-MAY-2016");
+		Plan newPlan7 = new Plan();
+		newPlan7.setPlan(107, "16-MAY-2016", "18-MAY-2016");
+		newPlan.add(newPlan1);
+		newPlan.add(newPlan2);
+		newPlan.add(newPlan3);
+		newPlan.add(newPlan4);
+		newPlan.add(newPlan5);
+		newPlan.add(newPlan6);
+		newPlan.add(newPlan7);
+		System.out.println(newPlan);
+	}
+	
+	public List<Plan> getCancelledPeriodFortask(List<Plan> oldPlan,List<Plan> newPlan){
+		
+		return newPlan;
+		
+	}
+
+}
+
+
+package maxton;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+public class Plan {
+	SimpleDateFormat sdf=new SimpleDateFormat("dd-MMM-yyyy");
+	
+	private int taskId;
+	private Date startDate;
+	private Date endDate;
+	
+	public void setPlan(int taskId, String startDate, String endDate){
+	this.taskId=taskId;
+	try {
+		this.startDate=sdf.parse(startDate);
+		this.endDate=sdf.parse(endDate);
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	}
+	@Override
+	public String toString() {
+		return taskId + "\t" + startDate+ "\t" + endDate+ "\n";
+	}
+}
