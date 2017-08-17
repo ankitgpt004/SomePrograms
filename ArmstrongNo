@@ -1,0 +1,22 @@
+package tests;
+
+public class ArmStrong {
+
+	public static void main(String arg[]){
+		int x=153;
+		int y=x;
+		int z;
+		int count=0;
+		while(y>0){
+			z=y%10;
+			count=count+(z*z*z);
+			y=y/10;
+		}
+		if(count==x){
+			System.out.println("arm");
+		}
+		else {
+			System.out.println("nhkjh");
+		}
+	}	
+}
