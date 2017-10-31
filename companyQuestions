@@ -1,0 +1,5 @@
+Lambda expression in itself is an anonymous method i.e. a method with no name which is used to provide implementation of the method defined by a functional interface.
+General form of lambda expression
+(optional) (Arguments) -> body
+(String s1, String s2) -> s1+s2;
+___________________________________________________________________
