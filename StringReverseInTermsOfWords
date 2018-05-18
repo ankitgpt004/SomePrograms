@@ -1,0 +1,14 @@
+package one;
+
+public class One {
+	
+	public static void main(String args[]){
+		String str = "Hi i am ankit gupta";
+		String[] strArr = str.split("\\s");
+		int len = strArr.length-1;
+		for(int i=len; i>=0;i--){
+			System.out.println(strArr[i]);
+		}
+ 	}
+
+}
