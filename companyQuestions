@@ -27,3 +27,4 @@ $ git add .
 $ git commit -m "committed for defect #17944"
 $ git push
 ____________________________________________________________________________________
+git reset --hard origin/master
