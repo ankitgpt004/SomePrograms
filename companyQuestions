@@ -8,3 +8,22 @@ __________________________________________________________________________
 http://java.spring.jobs4times.com/spring-Dispatcher-Servlet.html
 ________________________________________________________________________
 https://github.com/maheshkharwadkar/Java-Microservice-Sample-code
+____________________________________________________
+$ git add PolicyConstants.java
+$ git commit -m "constant file updated"
+$ git  push origin master
+$ git diff HEAD PolicyConstants.java
+____________________________________________________________________________________
+$ git status
+____________________________________________________________________________________
+$ git diff test/java/sf/claims/wc/policy/search/management/validator/ValidationDelegateTest.java
+____________________________________________________________________________________
+$ git fetch
+$ git merge
+
+$ git pull
+____________________________________________________________________________________
+$ git add .
+$ git commit -m "committed for defect #17944"
+$ git push
+____________________________________________________________________________________
