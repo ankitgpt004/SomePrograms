@@ -1,0 +1,19 @@
+minicube version
+minikube start
+kubectl version
+kubectl cluster-info
+kubectl run --image nginx test12
+kubectl get pod
+kubectl delete test123-----------
+kubectl port-forward teat12----------
+kubectl describe  pod test12---------------
+kubectl get nodes
+__________________________________
+yaml file
+spec
+__________________________________
+docker swarn
+orchestration
+
+
+define formatter

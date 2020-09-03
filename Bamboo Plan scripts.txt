@@ -1,0 +1,71 @@
+Bamboo Plan:
+
+1. Build-App
+goal:
+clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.repo.local=${bamboo.build.working.directory}/maven_repo -Dautomationpassword=${bamboo.AUTOMATIONPASSWORD} -Dautoamtionlogin=eptkairos-automation
+Environment variables:
+MAVEN_OPTS="-Xmx1024m"
+
+
+2. Sonar Analysis
+Environment variables:
+M2_HOME=/tmp
+Additional parameters:
+-Dsonar.host.url=https://sonar.forge.avaya.com
+-Dsonar.login=87f1229a07458dc6928cd3fe4d55227bd4403e23 
+-Dsonar.projectKey=com.avaya:sentinel 
+-Dautomationpassword=${bamboo.AUTOMATIONPASSWORD} 
+-Dautomationlogin=eptkairos-automation
+-Dmaven.repo.local=${bamboo.build.working.directory}/maven_repo
+
+3. coverity-analysis
+Script body:
+if [ -z "$COV_STREAM" ]; then
+ echo "COV_STREAM must be set" >&2
+exit 1
+fi
+if [ -z "$JAVA_HOME" ] ; then
+ echo "JAVA_HOME must be set" >&2
+ exit 1
+fi
+if [ ! -d "$JAVA_HOME" ] ; then
+ echo "JAVA_HOME=$JAVA_HOME does not appear to be a valid path." >&2
+ exit 1
+fi
+if [ -z "$M2_HOME" ] ; then
+ echo "M2_HOME must be set" >&2
+ exit 1
+fi
+if [ ! -d "$M2_HOME" ] ; then
+ echo "M2_HOME=$M2_HOME does not appear to be a valid path." >&2
+ exit 1
+fi
+export PATH=${PATH}:${M2_HOME}/bin:${COV_SA_PATH}
+if [ "$#" -eq "0" ]; then
+ echo "Missing build command" >&2
+ exit 1
+fi
+rm -rf analysis_dir
+coverity_analysis_config_file="${COV_STREAM}_config.xml"
+coverity_analysis_dir="${bamboo.build.working.directory}/analysis_dir"
+if [ -d $coverity_analysis_dir ]; then
+ rm -r -f $coverity_analysis_dir
+fi
+mkdir $coverity_analysis_dir
+echo "build command is $#"
+
+echo "1 Starting actual script"
+${bamboo.capability.Coverity-2019.06}/cov-configure --java --config $coverity_analysis_config_file || exit 1
+echo "2"
+${bamboo.capability.Coverity-2019.06}/cov-build --config $coverity_analysis_config_file --dir $coverity_analysis_dir mvn -B -Dmaven.repo.local=${bamboo.build.working.directory}/maven_repo/local clean compile -Dautomationpassword=${bamboo.AUTOMATIONPASSWORD} || exit 1
+echo "3"
+${bamboo.capability.Coverity-2019.06}/cov-analyze --include-java --dir $coverity_analysis_dir || exit 1
+echo "4"
+${bamboo.capability.Coverity-2019.06}/cov-format-errors --dir $coverity_analysis_dir --emacs-style > coverity_errors.txt || exit 1
+echo "5"
+${bamboo.capability.Coverity-2019.06}/cov-commit-defects --dir $coverity_analysis_dir --host coverity.avaya.com --https-port 8443 --stream ${COV_STREAM} --user commitusr --password commitusr
+echo "Everything as success"
+Argument:
+-Dmaven.repo.local=${bamboo.build.working.directory}/maven_repo -Dproject.bambooBuildNumber=${bamboo.buildNumber} -Dbamboo.buildNumber=${bamboo.buildNumber}
+Environment variables:
+COV_STREAM=Sentinel-1.0.0.1.0 JAVA_HOME="${bamboo.capability.system.jdk.JDK 1.11}" M2_HOME="${bamboo.capability.system.builder.mvn3.Maven 3.3.9}" PATH="$PATH:${bamboo.capability.Coverity-2019.06}:$M2_HOME/bin" MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=1024m"
